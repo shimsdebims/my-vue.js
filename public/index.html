@@ -1,17 +1,232 @@
 <!DOCTYPE html>
-<html lang="">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educative Courses</title>
+    <style>
+        /* Grid layout for course cards */
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        /* Styling for individual course cards */
+        .course-card {
+            border: 1px solid #ddd;
+            padding: 20px;
+            text-align: center;
+        }
+        /* Sizing for course images */
+        .course-card img {
+            width: 100px;
+            height: 100px;
+        }
+        /* Hide cart section by default */
+        .cart-section {
+            display: none;
+        }
+        /* Styling for disabled buttons */
+        .disabled {
+            background-color: #ccc;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Available Courses</h1>
+<!-- Button to toggle between course list and cart -->
+<button id="toggle-cart">Go to Cart</button>
+
+<!-- Course listing section -->
+<div id="lesson-section" class="course-grid">
+    <!-- Example course card -->
+    <div class="course-card">
+        <img src="math.png" alt="Math">
+        <h2>Math</h2>
+        <p>Price: $100</p>
+        <p>Duration: 3 months</p>
+        <p>Location: Room 101</p>
+        <p>Available spaces: <span class="spaces">5</span></p>
+        <button class="add-to-cart">Add to Cart</button>
+    </div>
+    <div class="course-card">
+        <img src="bio.png" alt="Biology">
+        <h2>Biology</h2>
+        <p>Price: $120</p>
+        <p>Duration: 4 months</p>
+        <p>Location: Lab 202</p>
+        <p>Available spaces: <span class="spaces">5</span></p>
+        <button class="add-to-cart">Add to Cart</button>
+    </div>
+    <div class="course-card">
+        <img src="bio.png" alt="Biology">
+        <h2>Spanish</h2>
+        <p>Price: $300</p>
+        <p>Duration: 6 months</p>
+        <p>Location: Lab 010</p>
+        <p>Available spaces: <span class="spaces">5</span></p>
+        <button class="add-to-cart">Add to Cart</button>
+    </div>
+    <div class="course-card">
+        <img src="bio.png" alt="Biology">
+        <h2>English</h2>
+        <p>Price: $100</p>
+        <p>Duration: 4 months</p>
+        <p>Location: Lab 320</p>
+        <p>Available spaces: <span class="spaces">5</span></p>
+        <button class="add-to-cart">Add to Cart</button>
+    </div>
+    <div class="course-card">
+        <img src="bio.png" alt="Biology">
+        <h2>Chemistry</h2>
+        <p>Price: $200</p>
+        <p>Duration: 6 months</p>
+        <p>Location: Lab 400</p>
+        <p>Available spaces: <span class="spaces">5</span></p>
+        <button class="add-to-cart">Add to Cart</button>
+    </div>
+    <div class="course-card">
+        <img src="bio.png" alt="Biology">
+        <h2>Basic Algebra</h2>
+        <p>Price: $120</p>
+        <p>Duration: 4 months</p>
+        <p>Location: Lab 145</p>
+        <p>Available spaces: <span class="spaces">5</span></p>
+        <button class="add-to-cart">Add to Cart</button>
+    </div>
+    <div class="course-card">
+        <img src="bio.png" alt="Biology">
+        <h2>Psychology</h2>
+        <p>Price: $500</p>
+        <p>Duration: 5 months</p>
+        <p>Location: Lab 108</p>
+        <p>Available spaces: <span class="spaces">5</span></p>
+        <button class="add-to-cart">Add to Cart</button>
+    </div>
+    <div class="course-card">
+        <img src="bio.png" alt="Biology">
+        <h2>Economics</h2>
+        <p>Price: $120</p>
+        <p>Duration: 4 months</p>
+        <p>Location: Lab 205</p>
+        <p>Available spaces: <span class="spaces">5</span></p>
+        <button class="add-to-cart">Add to Cart</button>
+    </div>
+    <div class="course-card">
+        <img src="bio.png" alt="Biology">
+        <h2>Geography</h2>
+        <p>Price: $150</p>
+        <p>Duration: 2 months</p>
+        <p>Location: Lab 225</p>
+        <p>Available spaces: <span class="spaces">5</span></p>
+        <button class="add-to-cart">Add to Cart</button>
+    </div>
+    <div class="course-card">
+        <img src="bio.png" alt="Biology">
+        <h2>History</h2>
+        <p>Price: $230</p>
+        <p>Duration: 3 months</p>
+        <p>Location: Lab 170</p>
+        <p>Available spaces: <span class="spaces">5</span></p>
+        <button class="add-to-cart">Add to Cart</button>
+    </div>
+    <div class="course-card">
+        <img src="bio.png" alt="Biology">
+        <h2>Advanced Math</h2>
+        <p>Price: $800</p>
+        <p>Duration: 6 months</p>
+        <p>Location: Lab 420</p>
+        <p>Available spaces: <span class="spaces">5</span></p>
+        <button class="add-to-cart">Add to Cart</button>
+    </div>
+
+    <!-- More course cards can be added here -->
+</div>
+
+<!-- Shopping cart section (hidden by default) -->
+<div id="cart-section" class="cart-section">
+    <h1>Your Shopping Cart</h1>
+    <ul id="cart-items"></ul>
+    
+    <h2>Checkout</h2>
+    <!-- Checkout form -->
+    <form id="checkout-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required>
+        <br>
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" required>
+        <br>
+        <button id="checkout-btn" class="disabled" disabled>Checkout</button>
+    </form>
+</div>
+
+<script>
+    // Select all necessary DOM elements
+    const addToCartButtons = document.querySelectorAll('.add-to-cart');
+    const cartItems = document.getElementById('cart-items');
+    const lessonSection = document.getElementById('lesson-section');
+    const cartSection = document.getElementById('cart-section');
+    const toggleCartBtn = document.getElementById('toggle-cart');
+    const checkoutForm = document.getElementById('checkout-form');
+    const checkoutBtn = document.getElementById('checkout-btn');
+
+    // Initialize an empty cart array
+    let cart = [];
+
+    // Add event listeners to all "Add to Cart" buttons
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const courseCard = this.parentElement;
+            const courseName = courseCard.querySelector('h2').textContent;
+            const availableSpaces = courseCard.querySelector('.spaces');
+            // Check if spaces are available before adding to cart
+            if (availableSpaces.textContent > 0) {
+                // Add course to cart and update UI
+                cart.push(courseName);
+                const listItem = document.createElement('li');
+                listItem.textContent = courseName;
+                cartItems.appendChild(listItem);
+
+                // Decrement available spaces
+                availableSpaces.textContent -= 1;
+            }
+        });
+    });
+
+    // Toggle between lesson and cart page
+    toggleCartBtn.addEventListener('click', function() {
+        if (lessonSection.style.display !== 'none') {
+            lessonSection.style.display = 'none';
+            cartSection.style.display = 'block';
+            toggleCartBtn.textContent = 'Go to Lessons';
+        } else {
+            lessonSection.style.display = 'grid';
+            cartSection.style.display = 'none';
+            toggleCartBtn.textContent = 'Go to Cart';
+        }
+    });
+
+    // Enable the Checkout button when valid inputs are entered
+    checkoutForm.addEventListener('input', function() {
+        const name = document.getElementById('name').value;
+        const phone = document.getElementById('phone').value;
+        // Validate name (only letters and spaces) and phone (only digits)
+        const nameValid = /^[a-zA-Z\s]+$/.test(name);
+        const phoneValid = /^\d+$/.test(phone);
+
+        // Enable or disable checkout button based on input validity
+        if (nameValid && phoneValid) {
+            checkoutBtn.classList.remove('disabled');
+            checkoutBtn.disabled = false;
+        } else {
+            checkoutBtn.classList.add('disabled');
+            checkoutBtn.disabled = true;
+        }
+    });
+</script>
+
+</body>
 </html>
