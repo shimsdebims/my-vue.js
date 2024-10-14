@@ -1,26 +1,42 @@
+App.vue
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <h1>Available Courses</h1>
+    <button @click="toggleCart">{{ showCart ? 'Go to Lessons' : 'Go to Cart' }}</button>
+
+    <CourseList v-if="!showCart" @add-to-cart="updateCart" />
+    <Cart v-if="showCart" :cart="cart" />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import CourseList from './CourseList.vue';
+import Cart from './Cart.vue';
 
 export default {
-  name: 'App',
   components: {
-    HelloWorld
+    CourseList,
+    Cart
+  },
+  data() {
+    return {
+      showCart: false,
+      cart: []
+    };
+  },
+  methods: {
+    toggleCart() {
+      this.showCart = !this.showCart;
+    },
+    updateCart(course) {
+      this.cart.push(course);
+    }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+button {
+  margin-top: 20px;
 }
 </style>
