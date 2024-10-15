@@ -10,8 +10,8 @@ App.vue
 </template>
 
 <script>
-import CourseList from './components/CourseList copy.vue';  
-import Cart from './components/Cart copy.vue';
+import CourseList from './components/CourseList.vue';  
+import Cart from './components/CartCopy.vue';
 //imports the CourseList and Cart components
 
 

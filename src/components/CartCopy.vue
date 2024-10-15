@@ -26,6 +26,7 @@ Cart.vue
 
 <script>
 export default {
+  name: 'CartCopy',
   props: {
     cart: Array   //cart is passed as a prop from the parent component and is identified as an array
   },
